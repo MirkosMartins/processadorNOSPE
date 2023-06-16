@@ -1,3 +1,11 @@
+import os
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+
+current_directory = os.getcwd()
+root = Tk()
+root.withdraw()  # Hide the root window
+
 memoria = [0,0,0,0,0,0,0,0,0,0,0]
 
 def clock(comando,i):
@@ -5,7 +13,7 @@ def clock(comando,i):
     print('FIM DO PROGRAMA')
     return -666
   else:
-    #print('COMANDO: ',comando)
+    print('COMANDO: ',comando)
     elementos = comando.split(' ')
     instrucao = elementos[0]
     if ',' in elementos[1]:
@@ -61,6 +69,7 @@ def clock(comando,i):
           print(memoria)
           #print('i=',i,'retorna:',i+1,'na lista:',i)
           return i+2
+    
     if instrucao == 'JMP':
       #IMPLEMENTAR
       #print('Instrucao:',instrucao,' destino',destino,'origem',origem)
@@ -75,9 +84,16 @@ def clock(comando,i):
 
 if __name__ == "__main__":
 
-    with open('fatorial.txt', 'r') as file:
+    # Open the file explorer dialog
+    filename = askopenfilename(initialdir=current_directory)
+    if filename:
+        print("Selected file:", filename)
+    else:
+        print("No file selected.")
+
+    with open(filename, 'r') as file:
         ListaLida = [line.strip('#') for line in file.readlines()]
-        
+
     i=0
     while(i!=-666):
         i = clock(ListaLida[i],i)
