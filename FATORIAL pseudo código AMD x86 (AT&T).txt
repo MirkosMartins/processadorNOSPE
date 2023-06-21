@@ -1,0 +1,38 @@
+.section .data
+    # Declaração de dados aqui
+
+.section .text
+    .global _start
+
+_start
+    # LOAD R0,10
+    movl $10, %eax   # Carrega o valor 10 para o registrador EAX (R0)
+
+    # LOAD R1,R0
+    movl %eax, %ebx  # Carrega o valor do registrador EAX (R0) para o registrador EBX (R1)
+
+    # MULT R1,R0
+    imull %ebx, %eax # Multiplica o valor no registrador EBX (R1) pelo valor no registrador EAX (R0)
+
+    # SUB R0,1
+    subl $1, %eax    # Subtrai 1 do valor no registrador EAX (R0)
+
+    # CMP R0,0
+    cmpl $0, %eax    # Compara o valor no registrador EAX (R0) com 0
+
+    # HALT
+    je halt         # Se o valor no registrador EAX (R0) for igual a 0, pula para a etiqueta halt
+
+    # JMP 3
+    jmp label3      # Salta para a etiqueta label3
+
+halt
+    # Código para parar a execução do programa
+
+label3
+    # Código após o salto
+
+    # Código para sair do programa
+    movl $0, %ebx
+    movl $1, %eax
+    int $0x80
